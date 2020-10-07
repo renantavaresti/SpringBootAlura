@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.alura.forum.controller.dto.TopicoDto;
 import br.com.alura.forum.modelo.Curso;
 import br.com.alura.forum.modelo.Topico;
 
@@ -15,10 +16,10 @@ public class TopicosController {
 	
 	//*A lógica nesse trecho seria carregar a lista com todos os tópicos e devolver ela pra quem fez a chamada.
 	@RequestMapping("/topicos")
-	public List<Topico> lista(){
-		Topico topico = new Topico("Duvida", "Duvida com Spring", new Curso("Spring", "Programação"));
+	public List<TopicoDto> lista(){
+		Topico topico = new Topico("Dúvida", "Dúvida com Spring", new Curso("Spring", "Programação"));
 		
-		return Arrays.asList(topico, topico, topico);
+		return TopicoDto.converter(Arrays.asList(topico, topico, topico));
 	}
 
 }
