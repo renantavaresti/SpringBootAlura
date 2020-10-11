@@ -13,12 +13,10 @@ import br.com.alura.forum.modelo.Topico;
 @RestController
 public class TopicosController {
 	//Temos que ter um método mapeando o endereço
-	
 	//A lógica nesse trecho seria carregar a lista com todos os tópicos e devolver ela pra quem fez a chamada.
 	@RequestMapping("/topicos")
-	public List<TopicoDto> lista(){
-		Topico topico = new Topico("Dúvida", "Dúvida com Spring", new Curso("Spring", "Programação"));
-		
+	public List<TopicoDto> lista() {
+		Topico topico = new Topico("Dúvida spring-boot:run", "Dúvida com Spring", new Curso("Spring", "Programação"));
 		return TopicoDto.converter(Arrays.asList(topico, topico, topico));
 	}
 

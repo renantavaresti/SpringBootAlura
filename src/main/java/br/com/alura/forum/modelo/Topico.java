@@ -4,15 +4,31 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Topico {
 
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String titulo;
 	private String mensagem;
 	private LocalDateTime dataCriacao = LocalDateTime.now();
+	@Enumerated(EnumType.STRING) // Como o tipo ENUM devolve o numero da posicao onde esta o STATUS, 
+	                             //utilizando o EnumType.STRING consigo retornar efetivamente a string ENUM
 	private StatusTopico status = StatusTopico.NAO_RESPONDIDO;
+	@ManyToOne //Muitos para um
 	private Usuario autor;
+	@ManyToOne //Muitos para um
 	private Curso curso;
+	@OneToMany(mappedBy = "Topico") // Passando essa propriedades ele nao acha q é um novo mapeamento e relaciona Topico a ele
 	private List<Resposta> respostas = new ArrayList<>();
 
 	public Topico(String titulo, String mensagem, Curso curso) {
