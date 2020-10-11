@@ -28,7 +28,7 @@ public class Topico {
 	private Usuario autor;
 	@ManyToOne //Muitos para um
 	private Curso curso;
-	@OneToMany(mappedBy = "Topico") // Passando essa propriedades ele nao acha q é um novo mapeamento e relaciona Topico a ele
+	@OneToMany(mappedBy = "topico") // Passando essa propriedades ele nao acha q é um novo mapeamento e relaciona Topico a ele
 	private List<Resposta> respostas = new ArrayList<>();
 
 	public Topico(String titulo, String mensagem, Curso curso) {
