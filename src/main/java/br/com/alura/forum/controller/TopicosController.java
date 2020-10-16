@@ -28,7 +28,6 @@ public class TopicosController {
 	@Autowired 	
 	private CursoRepository cursoRepository;
 
-	
 	//A lógica nesse trecho seria carregar a lista com todos os tópicos e devolver ela pra quem fez a chamada.
 	//temos que utilizar a notacao abaixo para sinalizar que é um GET
 	@GetMapping
@@ -41,7 +40,7 @@ public class TopicosController {
 			List<Topico> topicos = topicoRepository.findByCurso_Nome(nomeCurso);
 			return TopicoDto.converter(topicos);
 		}
-		}
+	}
 		
 	@PostMapping
 	public ResponseEntity<TopicoDto> cadastrar(@RequestBody TopicoForm form, UriComponentsBuilder uriBuilder) { //RequestBody Spring, esse parametro é para vc pegar no corpo da requisicao e nao na URL
