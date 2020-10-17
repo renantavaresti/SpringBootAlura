@@ -1,7 +1,6 @@
 package br.com.alura.forum.controller.form;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import br.com.alura.forum.modelo.Curso;
 import br.com.alura.forum.modelo.Topico;
@@ -11,7 +10,6 @@ import br.com.alura.forum.respository.CursoRepository;
 public class TopicoForm {
 
 	@NotNull
-	@Size(min = 5)
 	private String titulo;
 	@NotNull
 	private String mensagem;
@@ -26,11 +24,11 @@ public class TopicoForm {
 		this.titulo = titulo;
 	}
 
-	public String getMensage() {
+	public String getMensagem() {
 		return mensagem;
 	}
 
-	public void setMensage(String mensage) {
+	public void setMensagem(String mensage) {
 		this.mensagem = mensage;
 	}
 

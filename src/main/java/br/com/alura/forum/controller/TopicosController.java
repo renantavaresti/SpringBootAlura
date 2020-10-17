@@ -41,7 +41,7 @@ public class TopicosController {
 			return TopicoDto.converter(topicos);
 
 		} else {
-			List<Topico> topicos = topicoRepository.findByCurso_Nome(nomeCurso);
+			List<Topico> topicos = topicoRepository.findByCursoNome(nomeCurso);
 			return TopicoDto.converter(topicos);
 		}
 	}

@@ -11,7 +11,7 @@ import br.com.alura.forum.modelo.Topico;
 // JpaRespository tem o generics onde tenho q passar a entidade e qual tipo do atributo do ID dessa entidade
 public interface TopicoRepository extends JpaRepository<Topico, Long> {
 
-	List<Topico> findByCurso_Nome(String nomeCurso);
+	List<Topico> findByCursoNome(String nomeCurso);
 
 
 }
