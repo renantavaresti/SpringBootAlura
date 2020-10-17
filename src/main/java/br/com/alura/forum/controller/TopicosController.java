@@ -3,6 +3,8 @@ package br.com.alura.forum.controller;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,37 +21,38 @@ import br.com.alura.forum.respository.CursoRepository;
 import br.com.alura.forum.respository.TopicoRepository;
 
 @RestController
-@RequestMapping("/topicos") //Incluindo antes da classe, toda vez q tiver uma chamada para topica, vai cair aqui.
+@RequestMapping("/topicos") // Incluindo antes da classe, toda vez q tiver uma chamada para topica, vai cair
+							// aqui.
 public class TopicosController {
-	
-	@Autowired 	
+
+	@Autowired
 	private TopicoRepository topicoRepository;
-	
-	@Autowired 	
+
+	@Autowired
 	private CursoRepository cursoRepository;
 
-	//A lógica nesse trecho seria carregar a lista com todos os tópicos e devolver ela pra quem fez a chamada.
-	//temos que utilizar a notacao abaixo para sinalizar que é um GET
+	// A lógica nesse trecho seria carregar a lista com todos os tópicos e devolver
+	// ela pra quem fez a chamada.
+	// temos que utilizar a notacao abaixo para sinalizar que é um GET
 	@GetMapping
 	public List<TopicoDto> lista(String nomeCurso) {
-		if(nomeCurso == null) {
+		if (nomeCurso == null) {
 			List<Topico> topicos = topicoRepository.findAll();
 			return TopicoDto.converter(topicos);
-				
+
 		} else {
 			List<Topico> topicos = topicoRepository.findByCurso_Nome(nomeCurso);
 			return TopicoDto.converter(topicos);
 		}
 	}
-		
+
 	@PostMapping
-	public ResponseEntity<TopicoDto> cadastrar(@RequestBody TopicoForm form, UriComponentsBuilder uriBuilder) { //RequestBody Spring, esse parametro é para vc pegar no corpo da requisicao e nao na URL
+	public ResponseEntity<TopicoDto> cadastrar(@RequestBody @Valid TopicoForm form, UriComponentsBuilder uriBuilder) {
 		Topico topico = form.converter(cursoRepository);
 		topicoRepository.save(topico);
-		
+
 		URI uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
 		return ResponseEntity.created(uri).body(new TopicoDto(topico));
 	}
-	
 
 }
